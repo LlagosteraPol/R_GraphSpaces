@@ -1,14 +1,20 @@
 rm(list = ls())
 
-require(igraph)
 library(gtools)
+require(igraph)
+library(roxygen2)
 
-# TODO: Improve efficiency by generating all the isomorphisms using 'nauty'
+
+# TODO: Improve efficiency by generating all the basic (non-isomorphic) graphs using 'nauty'
 # TODO: Improve efficiency by storing only the dataframe of the possible edge configurations
 # and generate the igraph objects on demand
 
+#' Generate the graph space for 'n' nodes
 #'
 #' @param n size of the graph space (n*n matrix)
+#' 
+#' @return a list containing all possible graphs with 'n' nodes with all their isomorphisms
+#' 
 GraphSpace <- function(n){
   v_names <- c(1:n)
   all_possible_edges_df = combinations(n = n, r = 2, v = v_names)
@@ -29,5 +35,6 @@ GraphSpace <- function(n){
   graph_space
 }
 
+#----------------------RUN------------------------
 graph_space <- GraphSpace(n=5)
 plot(graph_space[['nE5']][[1]])

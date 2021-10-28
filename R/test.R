@@ -1,10 +1,12 @@
 
-# dyn.load("doubler.so")
-# .C("double_me", x = as.integer(5))
-# geng -bc num_nodes num_edges:num_edges
-# command = "nauty-geng " + str(4) + " " + str(i) + ":" + str(
-#   i) + " -c > " + getwd() + "/data/graph6/" + file_name
-# system(command)
+
+#------------------------------------GENERATE UNLABELLED GRAPHS WITH NAUTY----------------------------------
+#geng num_nodes num_edges:num_edges
+n_nodes <- 4
+min_n_edges <- 3
+max_n_edges <- 3
+command = paste0("nauty-geng ", n_nodes, " ", min_n_edges, ":", max_n_edges, " > ", getwd(), "/Data/test.g6")
+system(command)
 
 #-----------------------------------CREATE ALL POSSIBLE GRAPH COMBINATIONS----------------------------------
 node_names <- c(1,2,3)
