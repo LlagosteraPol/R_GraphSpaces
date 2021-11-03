@@ -11,30 +11,28 @@ library(roxygen2)
 
 #' Generate the graph space for 'n' nodes
 #'
-#' @param n size of the graph space (n*n matrix)
+#' @param adj_mtx  equivalence class adjacency matrix
 #' 
 #' @return a list containing all possible graphs with 'n' nodes with all their isomorphisms
 #' 
-GraphSpace <- function(n){
-  v_names <- c(1:n)
-  all_possible_edges_df = combinations(n = n, r = 2, v = v_names)
-  
+GraphSpace <- function(adj_mtx){
+  g <- igraph::graph_from_adjacency_matrix(adj_mtx, 'undirected')
+  #f_adj_mtx <- as.vector(t(adj_mtx)) # flattened matrix
+  #up_adj_mtx <- upper.tri(adj_mtx, diag = FALSE) * adj_mtx
   graph_space <- list()
-  for(n_comb in 1:nrow(all_possible_edges_df)){
-    tmp_graph_space <- list()
-    # Get all combinations of n_comb edges
-    edges_comb <- combinations(n=nrow(all_possible_edges_df), r=n_comb, v=c(1:nrow(all_possible_edges_df)))
-    
-    # For each edge combination, create a graph
-    for(row in 1:nrow(edges_comb)){
-      tmp_df <- as.data.frame(matrix(all_possible_edges_df[edges_comb[row,],], ncol=2))
-      tmp_graph_space[[length(tmp_graph_space)+1]] <-  graph_from_data_frame(tmp_df, directed = FALSE, vertices = v_names)
-    }
-    graph_space[[paste0('nE', n_comb)]] <- tmp_graph_space
+  
+  node_per <- permutations(n=nrow(adj_mtx), r=nrow(adj_mtx), v=c(1:nrow(adj_mtx)))
+
+  # For each edge combination, create a graph
+  for(row in 1:nrow(node_per)){
+    tmp_mtx <- list()
+    g_tmp <- permute(g, node_per[row,])
+    graph_space[[length(graph_space) + 1]] <- as.vector(t(as.matrix(as_adjacency_matrix(g_tmp))))
   }
   graph_space
 }
 
 #----------------------RUN------------------------
-graph_space <- GraphSpace(n=5)
-plot(graph_space[['nE5']][[1]])
+adj_mtx = matrix(c(0,1,0,1,0,1,0,1,0), nrow = 3)
+graph_space <- GraphSpace(adj_mtx)
+print(graph_space)

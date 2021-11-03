@@ -31,3 +31,15 @@ for(n_comb in 1:nrow(all_possible_edges_df)){
   graph_space[[paste0('nE', n_comb)]] <- tmp_graph_space
 }
 plot(graph_space[[1]])
+
+#--------------------------------CREATE ALL POSSIBLE ADJ_MTX ROW COMBINATIONS-------------------------------
+
+adj_mtx = matrix(c(0,1,0,1,0,1,0,1,0), nrow = 3)
+node_per <- permutations(n=nrow(adj_mtx), r=nrow(adj_mtx), v=c(1:nrow(adj_mtx)))
+tmp_mtx <- adj_mtx[, node_per[1,]]
+g <- igraph::graph_from_adjacency_matrix(adj_mtx, 'undirected')
+plot(g)
+g2 <- permute(g, node_per[5,])
+plot(g2)
+adj_mtx2 <- as.matrix(as_adjacency_matrix(g2))
+as.vector(t(adj_mtx2))
