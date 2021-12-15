@@ -43,3 +43,19 @@ g2 <- permute(g, node_per[5,])
 plot(g2)
 adj_mtx2 <- as.matrix(as_adjacency_matrix(g2))
 as.vector(t(adj_mtx2))
+
+#---------------------------------------------TESTING CLASSES------------------------------------------
+source("./R/graph_space.R")
+source("./R/ID.R")
+source("./R/Euclidean.R")
+
+adj_mtx = matrix(c(0,1,0,1,0,1,0,1,0), nrow = 3)
+graph_space <- GraphSpace(adj_mtx)
+igraph_space <- IGraphSpace(adj_mtx)
+
+igraph_set <- euclidean(ID(igraph_space[1:2]))
+
+
+
+
+

@@ -56,10 +56,3 @@ GetGraphSpaceMatrices <- function(igraph_list){
   }
   graph_space
 }
-
-#----------------------RUN------------------------
-adj_mtx = matrix(c(0,1,0,1,0,1,0,1,0), nrow = 3)
-graph_space <- GraphSpace(adj_mtx)
-print(graph_space)
-
-  igraph_space <- IGraphSpace(adj_mtx)
