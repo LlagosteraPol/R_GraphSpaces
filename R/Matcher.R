@@ -12,12 +12,15 @@ get_Instance <- function(obj){
 }
 
 the_dis.matcher <- function(obj){
-  g1 <- obj[0]
-  g2 <- obj[1]
-  g1_coords <- cbind(vertex_attr(g1, 'coordx'), vertex_attr(g1, 'coordy'))
-  colnames(g1_coords) <- c('coordx', 'coordy')
-  g2_coords <- cbind(vertex_attr(g2, 'coordx'), vertex_attr(g2, 'coordy'))
-  colnames(g2_coords) <- c('coordx', 'coordy')
+  g1 <- obj[[1]]
+  g2 <- obj[[2]]
+  dis <- 0
+  n <- gorder(g1)
+  
+  g1_coords <- cbind(vertex_attr(g1, 'xcoord'), vertex_attr(g1, 'ycoord'))
+  colnames(g1_coords) <- c('xcoord', 'ycoord')
+  g2_coords <- cbind(vertex_attr(g2, 'xcoord'), vertex_attr(g2, 'ycoord'))
+  colnames(g2_coords) <- c('xcoord', 'ycoord')
   
   if(length(g1_coords) < length(g2_coords)){
     g1_coords <- rbind(g1_coords, matrix(data = 0, ncol = 2, nrow = length(g1_coords) - length(g2_coords)))
@@ -25,22 +28,28 @@ the_dis.matcher <- function(obj){
     g2_coords <- rbind(g2_coords, matrix(data = 0, ncol = 2, nrow = length(g2_coords) - length(g1_coords)))
   }
   
-  for(n in length(g1_coords)){
-    dis = dis + self.measure.node_dis(V(g1)[n], V(g2)[n])
+  for(n in 1:n){
+    dis = dis + node_dis(obj, 
+                         vertex_attr(graph = g1, index = V(g1)[n]), 
+                         vertex_attr(graph = g2, index = V(g2)[n]))
+    #for(j in 1:n){
+      
+    #}
   }
-  
+  dis = dis + abs(gsize(g1) - gsize(g2))
   dis
 }
 
 
 dis <- function(obj){
+  # TODO: Finish implementation for list of graphs
   if(length(obj) == 1){
     print("TODO: implement when given only one graph")
   }else{
-    if(length(obj[1] > 1)){
+    if(length(obj[1]) > 1){
       print("TODO: implement when second argument is a set of graphs")
     }else{
-      the_dis(args[0], args[1])
+      the_dis(obj)
     }
   }
 }

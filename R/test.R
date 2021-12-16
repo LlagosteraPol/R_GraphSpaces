@@ -50,10 +50,28 @@ source("./R/ID.R")
 source("./R/Euclidean.R")
 
 adj_mtx = matrix(c(0,1,0,1,0,1,0,1,0), nrow = 3)
+
+x1 <- make_empty_graph(n = 6) %>%
+      add_edges(c(1,2, 2,1, 2,3, 3,2, 3,6, 6,3, 4,5, 5,4)) %>%
+      set_vertex_attr("xcoord", value = c(0.813, 1.606, 2.300, 0.950, 2.046, 2.959)) %>%
+      set_vertex_attr("ycoord", value = c(0.630, 2.488, 0.710, 1.616, 1.560, 2.387))
+
+x2 <- make_empty_graph(n = 6) %>%
+      add_edges(c(1,2, 2,1, 2,3, 3,2, 4,5, 5,4)) %>%
+      set_vertex_attr("xcoord", value = c(0.810, 1.440, 2.358, 0.786, 2.093, 3.3)) %>%
+      set_vertex_attr("ycoord", value = c(0.701, 2.437, 0.645, 1.535, 1.591, 2.2))
+
+x3 <- make_empty_graph(n = 6) %>%
+      add_edges(c(1,2, 2,1, 1,6, 6,1, 2,3, 3,2, 4,5, 5,4)) %>%
+      set_vertex_attr("xcoord", value = c(0.71, 1.45532, 2.21121, 0.796224, 2.06496, 2.75535)) %>%
+      set_vertex_attr("ycoord", value = c(0.72, 2.45648, 0.757368, 1.53137, 1.5699, 0.194153))
+
+
 graph_space <- GraphSpace(adj_mtx)
 igraph_space <- IGraphSpace(adj_mtx)
+igraph_lst <- list(x1, x2, x3)
 
-igraph_set <- euclidean(ID(igraph_space[1:2]))
+igraph_set <- euclidean(ID(igraph_lst[1:2]))
 
 
 
