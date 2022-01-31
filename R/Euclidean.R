@@ -1,9 +1,4 @@
 euclidean <- function(obj){
-  UseMethod("euclidean")
-}
-
-
-euclidean <- function(obj){
   if(is(obj, "matcher")){
     if(length(class(obj)) >= 3){
       stop("The class is already initialized.")
@@ -45,7 +40,6 @@ eu_the_dis <- function(x, y){
   else if(typeof(x) == "list" && typeof(y) == "list"){
     nx <- length(x)
     ny <- length(y)
-    n <- nx
     
     if( nx == 0 && ny == 0 ){
       return(0)
@@ -53,11 +47,12 @@ eu_the_dis <- function(x, y){
       return(eu_the_sim(y, y))
     }else if (ny == 0){
       return(eu_the_sim(x, x))
-    }else if(nx < ny){
+    }else if(nx <= ny){
       n <- ny
-      x <- c(x, rep(0, length(y) - length(x)))
-    }else if(nx > ny) {
-      y <- c(y, rep(0, length(x) - length(y)))
+      x <- c(x, rep(0, n - nx))
+    }else{
+      n <- nx
+      y <- c(y, rep(0, n - ny))
     }
   }
   dis <- 0
@@ -108,46 +103,26 @@ eu_the_sim <- function(x, y){
 }
 
 
-node_dis <- function(obj, x, y){
-  UseMethod("node_dis")
-}
-
-
 node_dis.euclidean <-function(obj, x, y){
   eu_the_dis(x, y)
 }
 
 
-node_sim <- function(obj){
-  UseMethod("node_sim")
-}
-
-
 node_sim.euclidean <-function(obj, x, y){
-  eu_the_sim(obj, x, y)
-}
-
-
-edge_dis <- function(obj){
-  UseMethod("edge_dis")
+  eu_the_sim(x, y)
 }
 
 
 edge_dis.euclidean <-function(obj, x, y){
-  eu_the_dis(obj, x, y)
-}
-
-
-edge_sim <- function(obj){
-  UseMethod("edge_sim")
+  eu_the_dis(x, y)
 }
 
 
 edge_sim.euclidean <-function(obj, x, y){
-  eu_the_sim(obj, x, y)
+  eu_the_sim(x, y)
 }
 
 
-get_Instance.euclidean <-function(obj, x, y){
+get_Instance.euclidean <-function(obj){
   return("euclidean")
 }

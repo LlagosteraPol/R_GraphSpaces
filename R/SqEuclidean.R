@@ -1,11 +1,5 @@
 # ToDo: Maybe no need to create this class, can be done as function of 'Euclidean'
 
-
-sqeuclidean <- function(obj){
-  UseMethod("sqeuclidean")
-}
-
-
 sqeuclidean <- function(obj){
   if(is(obj, "matcher")){
     if(length(class(obj)) >= 3){
@@ -20,19 +14,8 @@ sqeuclidean <- function(obj){
 }
 
 
-node_dis <- function(obj, x, y){
-  UseMethod("node_dis")
-}
-
-
 node_dis.euclidean <-function(obj, x, y){
-  attr(obj, 'class') <- c(class(obj), "euclidean")
   sqrt(eu_the_dis(x, y))
-}
-
-
-node_sim <- function(obj){
-  UseMethod("node_sim")
 }
 
 
@@ -41,27 +24,16 @@ node_sim.sqeuclidean <-function(obj, x, y){
 }
 
 
-edge_dis <- function(obj){
-  UseMethod("edge_dis")
-}
-
 edge_dis.sqeuclidean <-function(obj, x, y){
-  attr(obj, 'class') <- c(class(obj), "euclidean")
-  sqrt(eu_the_dis(obj, x, y))
-}
-
-
-edge_sim <- function(obj){
-  UseMethod("edge_sim")
+  sqrt(eu_the_dis(x, y))
 }
 
 
 edge_sim.sqeuclidean <-function(obj, x, y){
-  attr(obj, 'class') <- c(class(obj), "euclidean")
-  eu_the_sim(obj, x, y)
+  eu_the_sim(x, y)
 }
 
 
-get_Instance.sqeuclidean <-function(obj, x, y){
+get_Instance.sqeuclidean <-function(obj){
   return("sqeuclidean")
 }

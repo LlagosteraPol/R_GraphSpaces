@@ -1,15 +1,37 @@
+node_dis <- function(obj, x, y){
+  UseMethod("node_dis")
+}
+
+
+node_sim <- function(obj){
+  UseMethod("node_sim")
+}
+
+
+edge_dis <- function(obj){
+  UseMethod("edge_dis")
+}
+
+
+edge_sim <- function(obj){
+  UseMethod("edge_sim")
+}
+
 
 the_dis <- function(obj){
   UseMethod("the_dis")
 }
 
+
 the_sim <- function(obj){
   UseMethod("the_sim")
 }
 
+
 get_Instance <- function(obj){
   UseMethod("get_Instance")
 }
+
 
 the_dis.matcher <- function(obj){
   g1 <- obj[[1]]
