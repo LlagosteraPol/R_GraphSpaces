@@ -71,7 +71,7 @@ graph_space <- GraphSpace(adj_mtx)
 igraph_space <- IGraphSpace(adj_mtx)
 igraph_lst <- list(x1, x2, x3)
 
-igraph_set <- euclidean(ID(igraph_lst[1:2]))
+igraph_set <- euclidean(ID(x1, x2))
 
 
 

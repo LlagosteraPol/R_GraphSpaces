@@ -1,3 +1,12 @@
+
+#' It is used to calculate the euclidean distance between two networks
+#' 
+#' @name euclidean
+#' 
+#' @param obj The matcher subclass object containing a list with two networks
+#' 
+#' @return list of class c(matcher', <matcher_sub_class>, 'euclidean')
+#' 
 euclidean <- function(obj){
   if(is(obj, "matcher")){
     if(length(class(obj)) >= 3){
@@ -12,6 +21,15 @@ euclidean <- function(obj){
 }
 
 
+#' Calculates the euclidean distance between two nodes or edges
+#' 
+#' @name eu_the_dis
+#' 
+#' @param x first node or edge
+#' @param y second node or edge
+#' 
+#' @return euclidean distance
+#' 
 eu_the_dis <- function(x, y){
   # TODO: Check if the data type is not integer or list. Maybe Dataframe as in
   # python Pandas DataFrame.
@@ -63,6 +81,15 @@ eu_the_dis <- function(x, y){
 }
 
 
+#' Calculates the pointwise product between two nodes or edges
+#' 
+#' @name eu_the_dis
+#' 
+#' @param x first node or edge
+#' @param y second node or edge
+#' 
+#' @return the pointwise product
+#' 
 eu_the_sim <- function(x, y){
   # TODO: Check if the data type is not integer or list. Maybe Dataframe as in
   # python Pandas DataFrame.
@@ -103,26 +130,26 @@ eu_the_sim <- function(x, y){
 }
 
 
-node_dis.euclidean <-function(obj, x, y){
+node_dis.euclidean <- function(obj, x, y){
   eu_the_dis(x, y)
 }
 
 
-node_sim.euclidean <-function(obj, x, y){
+node_sim.euclidean <- function(obj, x, y){
   eu_the_sim(x, y)
 }
 
 
-edge_dis.euclidean <-function(obj, x, y){
+edge_dis.euclidean <- function(obj, x, y){
   eu_the_dis(x, y)
 }
 
 
-edge_sim.euclidean <-function(obj, x, y){
+edge_sim.euclidean <- function(obj, x, y){
   eu_the_sim(x, y)
 }
 
 
-get_Instance.euclidean <-function(obj){
+get_Instance.euclidean <- function(obj){
   return("euclidean")
 }

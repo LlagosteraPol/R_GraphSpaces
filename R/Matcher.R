@@ -1,3 +1,7 @@
+# TODO: Finish implementation
+# TODO: Review the documentation and upgrade it with better explanations
+# TODO: Check wich functions needs to be exported
+
 node_dis <- function(obj, x, y){
   UseMethod("node_dis")
 }
@@ -33,7 +37,18 @@ get_Instance <- function(obj){
 }
 
 
+#' Computes the distance between two networks. Allows different type of attributes on nodes and edges.
+#' 
+#' @name the_dis.matcher
+#' 
+#' @param obj list with two networks 
+#' 
+#' @return distance between the given networks
+#' 
 the_dis.matcher <- function(obj){
+  # TODO: Finish implementation
+  # TODO: Check class of obj
+  
   g1 <- obj[[1]]
   g2 <- obj[[2]]
   dis <- 0
@@ -63,6 +78,15 @@ the_dis.matcher <- function(obj){
 }
 
 
+#' Computes the distance between two networks. The type of distance depends on the class of the given object. Allows different type 
+#' of attributes on nodes and edges.
+#' 
+#' @name dis
+#' 
+#' @param obj list with two networks 
+#' 
+#' @return distance between the given networks
+#' 
 dis <- function(obj){
   # TODO: Finish implementation for list of graphs
   if(length(obj) == 1){

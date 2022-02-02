@@ -1,3 +1,12 @@
+
+#' It is used to calculate the hamming distance between two networks
+#' 
+#' @name hamming
+#' 
+#' @param obj The matcher subclass object containing a list with two networks
+#' 
+#' @return list of class c(matcher', <matcher_sub_class>, 'hamming')
+#' 
 hm_the_dis <- function(x, y){
   # TODO: Check if the data type is not integer or list. Maybe Dataframe as in
   # python Pandas DataFrame.
@@ -46,20 +55,32 @@ hm_the_dis <- function(x, y){
   return( compute_hamming_distance( x, y ) )
 }
 
-node_dis.hamming  <-function(obj, x, y){
+node_dis.hamming <- function(obj, x, y){
   hm_the_dis(x, y)
 }
 
 
-edge_dis.hamming <-function(obj, x, y){
+edge_dis.hamming <- function(obj, x, y){
   hm_the_dis(x, y)
 }
 
-get_Instance.hamming <-function(obj){
+
+get_Instance.hamming <- function(obj){
   return("hamming")
 }
 
-#' Function code extracted from https://johanndejong.wordpress.com/2015/10/02/faster-hamming-distance-in-r-2/
+
+#' Calcultes the hamming distance between two networks
+#' 
+#' @name compute_hamming_distance
+#' 
+#' @source Function code extracted from https://johanndejong.wordpress.com/2015/10/02/faster-hamming-distance-in-r-2/
+#' 
+#' @param x matrix or vertice with the first network
+#' @param y matrix or vertice with the first network
+#' 
+#' @return hamming distance
+#' 
 compute_hamming_distance <- function(x, y = NULL){
   if (is.null(y)) {
     uniqs <- unique(as.vector(x))

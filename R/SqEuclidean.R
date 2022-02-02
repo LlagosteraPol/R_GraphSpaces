@@ -1,5 +1,13 @@
 # ToDo: Maybe no need to create this class, can be done as function of 'Euclidean'
 
+#' It is used to calculate the squared euclidean distance between two networks
+#' 
+#' @name sqeuclidean
+#' 
+#' @param obj The matcher subclass object containing a list with two networks
+#' 
+#' @return list of class c(matcher', <matcher_sub_class>, 'sqeuclidean')
+#' 
 sqeuclidean <- function(obj){
   if(is(obj, "matcher")){
     if(length(class(obj)) >= 3){
@@ -14,26 +22,26 @@ sqeuclidean <- function(obj){
 }
 
 
-node_dis.euclidean <-function(obj, x, y){
+node_dis.euclidean <- function(obj, x, y){
   sqrt(eu_the_dis(x, y))
 }
 
 
-node_sim.sqeuclidean <-function(obj, x, y){
+node_sim.sqeuclidean <- function(obj, x, y){
   eu_the_sim(obj, x, y)
 }
 
 
-edge_dis.sqeuclidean <-function(obj, x, y){
+edge_dis.sqeuclidean <- function(obj, x, y){
   sqrt(eu_the_dis(x, y))
 }
 
 
-edge_sim.sqeuclidean <-function(obj, x, y){
+edge_sim.sqeuclidean <- function(obj, x, y){
   eu_the_sim(x, y)
 }
 
 
-get_Instance.sqeuclidean <-function(obj){
+get_Instance.sqeuclidean <- function(obj){
   return("sqeuclidean")
 }
